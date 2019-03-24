@@ -24,14 +24,8 @@ RUN chmod 755 /*.sh
 
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 
-RUN git clone https://github.com/firesunCN/BlueLotus_XSSReceiver.git --depth 1 /app/tmp/ && \
-	mv /app/tmp/* /app/ && \
-	rm -fr /app/tmp/ && \
-	mv /app/config-sample.php /app/config.php && \
-	pass=`php -r '$salt="!KTMdg#^^I6Z!deIVR#SgpAI6qTN7oVl";$key="bluelotus";$key=md5($salt.$key.$salt);$key=md5($salt.$key.$salt);$key=md5($salt.$key.$salt);echo $key;'`;sed -i  "s/2a05218c7aa0a6dbd370985d984627b8/$pass/g" /app/config.php  && \
-	rm -fr /app/diff && \
-	rm -fr /app/guide && \
-	rm -fr /app/src
+COPY ./www /app
+RUN mv /app/config-sample.php /app/config.php
 	
 EXPOSE 80
 
