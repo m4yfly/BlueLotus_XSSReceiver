@@ -9,7 +9,7 @@ else
 fi
 
 if [ -n "$ADMIN_PASS" ]; then
-    pass=`php -r '$salt="!KTMdg#^^I6Z!deIVR#SgpAI6qTN7oVl";$key="$ADMIN_PASS";$key=md5($salt.$key.$salt);$key=md5($salt.$key.$salt);$key=md5($salt.$key.$salt);echo $key;'`;sed -i  "s/2a05218c7aa0a6dbd370985d984627b8/$pass/g" /app/config.php
+    pass=`php -r '$salt="!KTMdg#^^I6Z!deIVR#SgpAI6qTN7oVl";$key=getenv("ADMIN_PASS");$key=md5($salt.$key.$salt);$key=md5($salt.$key.$salt);$key=md5($salt.$key.$salt);echo $key;'`;sed -i  "s/2a05218c7aa0a6dbd370985d984627b8/$pass/g" /app/config.php
 fi
 
 if [ -n "$MAIL_ENABLE" ]; then
